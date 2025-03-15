@@ -14,17 +14,13 @@ Eclipso is a cosmic-themed habit tracker that gamifies your daily routines, help
 
 ## Tech Stack
 
+[![Tech Stack](https://skillicons.dev/icons?i=vite,ts,tailwind,prisma,mongodb,nextjs,react,css)](https://skillicons.dev)
+
 - **Frontend:** Next.js, TypeScript, Tailwind CSS
 - **Authentication:** NextAuth.js
 - **Fonts:**
   - Flazie
   - Absans
-  - Baunk
-  - MilkyWalky
-  - Zighead
-  - Cotta
-  - Berlys
-  - CosmicVibrant
 
 ## Folder Structure
 
@@ -57,10 +53,13 @@ eclipso/
 
 ## Color Palette
 
-- **Background:** `#262627` (Dark Gray)
-- **Text:** `#FFFFFF` (White), `#F5A9B8` (Soft Pink)
-- **Cards:** `#505050` (Muted Gray)
-- **Buttons & Borders:** `#303030` (Deep Gray)
+| Color             | Hex Code  | Description |
+| ----------------- | --------- | ----------- |
+| Background        | `#262627` | Dark Gray   |
+| Text              | `#FFFFFF` | White       |
+| Text (Accent)     | `#F5A9B8` | Soft Pink   |
+| Cards             | `#505050` | Muted Gray  |
+| Buttons & Borders | `#303030` | Deep Gray   |
 
 ## Installation
 
