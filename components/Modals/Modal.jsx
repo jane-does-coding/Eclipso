@@ -56,7 +56,7 @@ const Modal = ({
 							showModal ? "translate-y-0" : "translate-y-full"
 						} ${showModal ? "opacity-100" : "opacity-0"}`}
 					>
-						<div className="translate h-full lg:h-auto md:h-auto border-0 rounded-lg relative flex flex-col w-full shadow-2xl bg-neutral-800 border-neutral-900 border-2 outline-none focus:outline-none">
+						<div className="translate h-full lg:h-auto md:h-auto rounded-lg relative flex flex-col w-full shadow-2xl bg-neutral-800 border-neutral-900 border-2 outline-none focus:outline-none">
 							{/* Header */}
 							<div className="flex items-center p-6 rounded-t justify-center relative border-b-[1px]">
 								<button
