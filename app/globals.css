@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: "Berlys";
+	src: url("../public/Berlys/Berlys.otf") format("opentype");
+}
+
+.Berlys {
+	font-family: "Berlys";
+}
+
+@font-face {
+	font-family: "CosmicVibrant";
+	src: url("../public/CosmicVibrant/CosmicVibrant.otf") format("opentype");
+}
+
+.CosmicVibrant {
+	font-family: "CosmicVibrant";
+}
+
+@font-face {
+	font-family: "Flazie";
+	src: url("../public/Flazie/Flazie.otf") format("opentype");
+}
+
+.Flazie {
+	font-family: "Flazie";
+	font-weight: 100;
+}
+
+@font-face {
+	font-family: "MilkyWalky";
+	src: url("../public/MilkyWalky/MilkyWalky.otf") format("opentype");
+}
+
+.MilkyWalky {
+	font-family: "MilkyWalky";
+	font-weight: 100;
+}
+
+@font-face {
+	font-family: "Zighead";
+	src: url("../public/Zighead/Zighead.otf") format("opentype");
+}
+
+.Zighead {
+	font-family: "Zighead";
+	font-weight: 100;
+}
+
+@font-face {
+	font-family: "Baunk";
+	src: url("../public/Baunk/Baunk.otf") format("opentype");
+}
+
+.Baunk {
+	font-family: "Baunk";
+	font-weight: 100;
+}
+
+@font-face {
+	font-family: "Absans";
+	src: url("../public/Absans/Absans.otf") format("opentype");
+}
+
+.Absans {
+	font-family: "Absans";
+	font-weight: 100;
+}
+
+@font-face {
+	font-family: "Cotta";
+	src: url("../public/Cotta/Cotta.otf") format("opentype");
+}
+
+.Cotta {
+	font-family: "Cotta";
+}
+
+.glowing-text {
+	text-shadow: 3px 3px 0px white !important;
+}
