@@ -39,7 +39,6 @@ const RegisterModal = () => {
 
 		try {
 			if (currentStep === 1) {
-				// Step 1: Mock registration
 				console.log("Registering user:", {
 					name: data.name,
 					email: data.email,
@@ -47,14 +46,40 @@ const RegisterModal = () => {
 				});
 				setCurrentStep(2); // Move to step 2 (habit setup)
 			} else if (currentStep === 2) {
-				// Step 2: Mock saving habits
 				console.log("Saving habits:", data.habits);
 				setCurrentStep(3); // Move to step 3 (goal setup)
 			} else if (currentStep === 3) {
-				// Step 3: Mock setting goal
 				console.log("Setting goal:", data.goalDuration);
-				registerModal.onClose(); // Close modal after completing registration
-				loginModal.onOpen(); // Optionally open login modal
+				console.log({
+					name: data.name,
+					email: data.email,
+					password: data.password,
+					goal: data.goalDuration,
+				});
+				const response = await fetch("/api/auth/register", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						fullName: data.name,
+						email: data.email,
+						password: data.password,
+						goalDate: data.goalDuration,
+					}),
+				});
+
+				if (!response.ok) {
+					throw new Error("Failed to register user");
+				}
+
+				const user = await response.json();
+
+				// Show success message
+				toast.success("Registration successful!");
+
+				// Close the register modal
+				registerModal.onClose();
 			}
 		} catch (error) {
 			console.error(error);

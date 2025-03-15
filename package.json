@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^6.5.0",
     "@radix-ui/react-select": "^2.1.6",
     "axios": "^1.8.3",
+    "bcrypt": "^5.1.1",
     "next": "15.1.7",
     "next-auth": "^4.24.11",
+    "prisma": "^6.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
