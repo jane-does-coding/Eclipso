@@ -21,6 +21,9 @@ export default async function getCurrentUser() {
 			where: {
 				email: session.user.email as string,
 			},
+			include: {
+				habits: true,
+			},
 		});
 
 		if (!currentUser) {

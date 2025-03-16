@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import RegisterModal from "../components/Modals/RegisterModal";
 import getCurrentUser from "./actions/getCurrentUser";
 import LoginModal from "../components/Modals/LoginModal";
+import HabitModal from "../components/Modals/HabitModal";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -21,7 +22,7 @@ export const metadata = {
 };
 
 const currentUser = await getCurrentUser();
-console.log(currentUser);
+// console.log(currentUser);
 
 export default function RootLayout({ children }) {
 	return (
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
 			>
 				<RegisterModal />
 				<LoginModal />
+				<HabitModal />
 				{children}
 				<Footer />
 			</body>
