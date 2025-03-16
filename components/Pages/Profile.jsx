@@ -4,6 +4,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import useHabitModal from "../../app/hooks/useHabitModal";
+import axios from "axios";
 
 const CircularProgress = ({ value }) => {
 	const radius = 40;
@@ -64,7 +65,6 @@ const ProfilePage = ({ currentUser }) => {
 		console.log("idk what im doing: ");
 		console.log(updatedHabit);
 
-		// Update the habit in the database
 		const response = await fetch(`/api/habits/index/${id}`, {
 			method: "PUT",
 			headers: {
@@ -78,16 +78,26 @@ const ProfilePage = ({ currentUser }) => {
 		}
 	};
 
+	const onDelete = async (habitId) => {
+		try {
+			await axios.delete(`/api/habits/index/${habitId}`);
+			router.refresh();
+		} catch (error) {
+			console.error("Error deleting habit:", error);
+		} finally {
+		}
+	};
+
 	const user = {
 		name: currentUser.fullName,
 		email: currentUser.email,
 		avatar: "/avatar.png",
 		goalDays: currentUser.goalDate,
-		goalProgress: 10, // This should ideally come from the database
-		streak: 22, // This should ideally come from the database
-		completionRate: 85, // This should ideally come from the database
+		goalProgress: 10,
+		streak: 22,
+		completionRate: 85,
 		totalHabits: currentUser.habits.length,
-		mostConsistentHabit: "Morning Run", // This should ideally come from the database
+		mostConsistentHabit: "Morning Run",
 	};
 
 	return (
@@ -155,6 +165,7 @@ const ProfilePage = ({ currentUser }) => {
 								>
 									{habit.completed ? "Undo" : "Done"}
 								</button>
+								<button onClick={() => onDelete(habit.id)}>Delete</button>
 							</div>
 						</li>
 					))}
