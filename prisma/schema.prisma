@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = env("DATABASE_URL") // Your MongoDB connection string
+  url      = env("DATABASE_URL") 
 }
 
 model User {
@@ -13,7 +13,10 @@ model User {
   email     String   @unique
   password  String
   goalDate  Int
+  createdAt DateTime @default(now()) 
+  updatedAt DateTime @updatedAt      
   habits    Habit[]
+
 }
 
 model Habit {
