@@ -14,8 +14,7 @@ export default async function getCurrentUser() {
 		const session = await getSession();
 
 		if (!session?.user?.email) {
-			console.log("heh");
-			return "didnt pass first";
+			return null;
 		}
 
 		const currentUser = await prisma.user.findUnique({
@@ -25,8 +24,7 @@ export default async function getCurrentUser() {
 		});
 
 		if (!currentUser) {
-			console.log("not logged in");
-			return "didnt pass 2nd";
+			return null;
 		}
 
 		return {
