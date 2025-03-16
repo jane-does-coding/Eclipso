@@ -51,7 +51,7 @@ export default function Home(currentUser) {
 							Eclipso - Align Your Habits, Unlock Your Potential.
 						</p>
 					</div>
-					<div className="flex flex-col gap-4">
+					<div className="flex  mt-4 sm:mt-0 sm:flex-col gap-4">
 						<a
 							href="/profile"
 							className="text-neutral-200 flex gap-2 text-lg sm:text-[1.5rem] items-center justify-center Absans transition-all"

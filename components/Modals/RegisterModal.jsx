@@ -39,23 +39,12 @@ const RegisterModal = () => {
 
 		try {
 			if (currentStep === 1) {
-				console.log("Registering user:", {
-					name: data.name,
-					email: data.email,
-					password: data.password,
-				});
-				setCurrentStep(2); // Move to step 2 (habit setup)
+				setCurrentStep(2);
 			} else if (currentStep === 2) {
-				console.log("Saving habits:", data.habits);
-				setCurrentStep(3); // Move to step 3 (goal setup)
+				setCurrentStep(3);
 			} else if (currentStep === 3) {
-				console.log("Setting goal:", data.goalDuration);
-				console.log({
-					name: data.name,
-					email: data.email,
-					password: data.password,
-					goal: data.goalDuration,
-				});
+				console.log("Setting goal and registering:", data);
+
 				const response = await fetch("/api/auth/register", {
 					method: "POST",
 					headers: {
@@ -66,6 +55,7 @@ const RegisterModal = () => {
 						email: data.email,
 						password: data.password,
 						goalDate: data.goalDuration,
+						habits: data.habits.filter((habit) => habit.trim() !== ""), // Remove empty habits
 					}),
 				});
 
@@ -73,12 +63,7 @@ const RegisterModal = () => {
 					throw new Error("Failed to register user");
 				}
 
-				const user = await response.json();
-
-				// Show success message
 				toast.success("Registration successful!");
-
-				// Close the register modal
 				registerModal.onClose();
 			}
 		} catch (error) {

@@ -26,12 +26,12 @@ const Input = ({
 				{...register(id, { required })}
 				placeholder=" "
 				type={type}
-				className={`peer w-full p-4 pt-6 font-light bg-neutral-950 border-2 text-neutral-200 rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed Absans ${
+				className={`peer w-full p-4 pt-6 font-light bg-neutral-900/80 border-2 text-neutral-200 rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed Absans ${
 					formatPrice ? "pl-9" : "pl-4"
 				} ${
 					errors[id]
 						? "border-rose-300 focus:border-rose-400"
-						: "border-neutral-500 focus:border-white"
+						: "border-neutral-600 focus:border-white"
 				}`}
 			/>
 			<label
