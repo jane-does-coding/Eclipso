@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import useHabitModal from "../../app/hooks/useHabitModal";
 import axios from "axios";
+import { FaRegTrashCan } from "react-icons/fa6";
 
 const CircularProgress = ({ value }) => {
 	const radius = 40;
@@ -81,11 +82,13 @@ const ProfilePage = ({ currentUser }) => {
 	const onDelete = async (habitId) => {
 		try {
 			await axios.delete(`/api/habits/index/${habitId}`);
-			router.refresh();
+			router.push("/");
 		} catch (error) {
 			console.error("Error deleting habit:", error);
 		} finally {
+			router.push("/");
 		}
+		router.push("/");
 	};
 
 	const user = {
@@ -97,7 +100,7 @@ const ProfilePage = ({ currentUser }) => {
 		streak: 22,
 		completionRate: 85,
 		totalHabits: currentUser.habits.length,
-		mostConsistentHabit: "Morning Run",
+		mostConsistentHabit: currentUser.habits[0].name,
 	};
 
 	return (
@@ -165,7 +168,9 @@ const ProfilePage = ({ currentUser }) => {
 								>
 									{habit.completed ? "Undo" : "Done"}
 								</button>
-								<button onClick={() => onDelete(habit.id)}>Delete</button>
+								<button onClick={() => onDelete(habit.id)}>
+									<FaRegTrashCan size={24} />
+								</button>
 							</div>
 						</li>
 					))}

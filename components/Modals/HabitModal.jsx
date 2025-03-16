@@ -50,12 +50,14 @@ const HabitModal = () => {
 			console.log(responsedata);
 
 			console.log("habit created with ID:", responsedata.id);
-
+			habitModal.onClose();
+			router.push("/");
 			toast.success("habit Created");
 		} catch (error) {
 			console.error("Error creating habit:", error);
 			toast.error("Error creating habit");
 		}
+		router.push("/");
 	};
 
 	const onToggle = useCallback(() => {
@@ -65,10 +67,10 @@ const HabitModal = () => {
 
 	const bodyContent = (
 		<div className="flex flex-col gap-4">
-			<Heading title="Welcome back" subtitle="Login to your account!" />
+			<Heading title="Want to level up?" subtitle="Add more habits!" />
 			<Input
 				id="name"
-				label="name"
+				label="Enter a habit"
 				disabled={isLoading}
 				errors={errors}
 				register={register}
@@ -80,7 +82,7 @@ const HabitModal = () => {
 	const footerContent = (
 		<div className="flex flex-col gap-4 mt-3">
 			<hr />
-
+			{/* 
 			<div className="text-neutral-400 text-center mt-2 font-light">
 				<div className="flex flex-row items-center gap-2 justify-center">
 					<p>First time using Eclipso?</p>
@@ -91,7 +93,7 @@ const HabitModal = () => {
 						Create an account
 					</p>
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 
