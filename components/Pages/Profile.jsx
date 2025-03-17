@@ -63,19 +63,24 @@ const ProfilePage = ({ currentUser }) => {
 	const toggleHabit = async (id) => {
 		const habit = habits.find((h) => h.id === id);
 		const updatedHabit = { ...habit, completed: !habit.completed };
-		console.log("idk what im doing: ");
-		console.log(updatedHabit);
 
-		const response = await fetch(`/api/habits/index/${id}`, {
-			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ completed: updatedHabit.completed }),
-		});
+		try {
+			const response = await fetch(`/api/habits/completions`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					habitId: id,
+					completed: updatedHabit.completed,
+				}), // 🔥 Send habitId
+			});
 
-		if (response.ok) {
-			setHabits(habits.map((h) => (h.id === id ? updatedHabit : h)));
+			if (response.ok) {
+				setHabits(habits.map((h) => (h.id === id ? updatedHabit : h)));
+			} else {
+				console.error("Failed to update habit completion.");
+			}
+		} catch (error) {
+			console.error("Error toggling habit:", error);
 		}
 	};
 

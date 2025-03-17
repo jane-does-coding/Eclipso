@@ -4,29 +4,52 @@ import getCurrentUser from "../../../actions/getCurrentUser";
 
 export async function POST(req) {
 	const body = await req.json();
-	const { habitId } = body;
-	const user = await getCurrentUser();
-	console.log(habitId, user, body, "date:" + new Date());
+	const { habitId, completed } = body;
+	const currentUser = await getCurrentUser();
+
+	if (!currentUser) {
+		return NextResponse.json({ error: "No currentUser" }, { status: 401 });
+	}
+
+	const currentDate = new Date();
+	currentDate.setUTCHours(0, 0, 0, 0);
+	console.log({
+		habitId,
+		userId: currentUser.id, // 🔥 Added user filter
+		date: currentDate,
+	});
 
 	try {
-		const todo = await prisma.todo.create({
-			data: {
-				title,
-				userId: user?.id,
+		const existingCompletion = await prisma.habitCompletion.findFirst({
+			where: {
+				habitId,
+				userId: currentUser.id, // 🔥 Added user filter
+				date: currentDate,
 			},
 		});
 
-		console.log(todo);
-		return NextResponse.json(todo);
+		if (existingCompletion) {
+			const updatedEntry = await prisma.habitCompletion.update({
+				where: { id: existingCompletion.id },
+				data: { completed },
+			});
+			return NextResponse.json(updatedEntry);
+		} else {
+			const newEntry = await prisma.habitCompletion.create({
+				data: {
+					habitId,
+					userId: currentUser.id, // 🔥 Ensure correct user ownership
+					completed,
+					date: currentDate,
+				},
+			});
+			return NextResponse.json(newEntry);
+		}
 	} catch (error) {
-		console.error("Error creating todo:", error);
+		console.error("Error updating habit completion:", error);
 		return NextResponse.json(
-			{ message: "Error creating todo" },
+			{ error: "Error updating habit completion" },
 			{ status: 500 }
 		);
-	}
-	if (true) {
-	} else {
-		return NextResponse.json({ message: "not authorized" }, { status: 401 });
 	}
 }
