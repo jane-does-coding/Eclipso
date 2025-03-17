@@ -61,6 +61,16 @@ eclipso/
 | Cards             | `#505050` | Muted Gray  |
 | Buttons & Borders | `#303030` | Deep Gray   |
 
+## Environment Variables
+
+The following environment variables are required and must be stored in an `.env` file:
+
+```env
+MONGODB_URL=
+NEXT_SECRET=
+```
+
+
 ## Installation
 
 1. Clone the repository:
