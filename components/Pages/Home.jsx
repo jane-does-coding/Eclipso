@@ -60,7 +60,6 @@ export default function Home(currentUser) {
 							Profile
 						</a>
 						<a
-							href="/profile"
 							className="text-neutral-200 flex gap-2 text-lg sm:text-[1.5rem] items-center justify-center Absans transition-all"
 							onClick={() => signOut()}
 						>
