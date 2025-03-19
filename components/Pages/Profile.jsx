@@ -60,9 +60,19 @@ const ProfilePage = ({ currentUser }) => {
 	const [isStreakInfo, setIsStreakInfo] = useState(false);
 	const habitModal = useHabitModal();
 
+	const isHabitCompletedToday = (habit) => {
+		const today = new Date().toISOString().split("T")[0];
+
+		return habit.completions.some(
+			(completion) =>
+				new Date(completion.date).toISOString().split("T")[0] === today &&
+				completion.completed
+		);
+	};
+
 	const toggleHabit = async (id) => {
 		const habit = habits.find((h) => h.id === id);
-		const updatedHabit = { ...habit, completed: !habit.completed };
+		const updatedHabit = { ...habit, completed: !isHabitCompletedToday(habit) };
 
 		try {
 			const response = await fetch(`/api/habits/completions`, {
@@ -71,7 +81,7 @@ const ProfilePage = ({ currentUser }) => {
 				body: JSON.stringify({
 					habitId: id,
 					completed: updatedHabit.completed,
-				}), // 🔥 Send habitId
+				}),
 			});
 
 			if (response.ok) {
@@ -168,31 +178,41 @@ const ProfilePage = ({ currentUser }) => {
 						</div>
 					)}
 					{habits.length > 0 &&
-						habits.map((habit) => (
-							<li
-								key={habit.id}
-								className="flex items-center justify-between bg-neutral-700 p-3 px-8 rounded-lg"
-							>
-								<span
-									className={`Absans text-[1.5rem] ${
-										habit.completed ? "line-through text-gray-500" : ""
+						habits.map((habit) => {
+							const isCompleted = isHabitCompletedToday(habit);
+
+							return (
+								<li
+									key={habit.id}
+									className={`flex items-center justify-between bg-neutral-700 p-3 px-8 rounded-lg ${
+										isCompleted ? "bg-green-700" : ""
 									}`}
 								>
-									{habit.name}
-								</span>
-								<div className="flex gap-2">
-									<button
-										onClick={() => toggleHabit(habit.id)}
-										className="px-4 py-2 text-sm bg-rose-300 text-neutral-900 rounded-full hover:bg-rose-400 transition"
+									<span
+										className={`Absans text-[1.5rem] ${
+											isCompleted ? "line-through text-gray-500" : ""
+										}`}
 									>
-										{habit.completed ? "Undo" : "Done"}
-									</button>
-									<button onClick={() => onDelete(habit.id)}>
-										<FaRegTrashCan size={24} />
-									</button>
-								</div>
-							</li>
-						))}
+										{habit.name}
+									</span>
+									<div className="flex gap-2">
+										<button
+											onClick={() => toggleHabit(habit.id)}
+											className={`px-4 py-2 text-sm rounded-full transition ${
+												isCompleted
+													? "bg-gray-500 text-white hover:bg-gray-600"
+													: "bg-rose-300 text-neutral-900 hover:bg-rose-400"
+											}`}
+										>
+											{isCompleted ? "Undo" : "Done"}
+										</button>
+										<button onClick={() => onDelete(habit.id)}>
+											<FaRegTrashCan size={24} />
+										</button>
+									</div>
+								</li>
+							);
+						})}
 				</ul>
 			</div>
 

@@ -22,7 +22,11 @@ export default async function getCurrentUser() {
 				email: session.user.email as string,
 			},
 			include: {
-				habits: true,
+				habits: {
+					include: {
+						completions: true, // ✅ This includes completions inside habits
+					},
+				},
 			},
 		});
 
