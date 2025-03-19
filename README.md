@@ -61,6 +61,16 @@ eclipso/
 | Cards             | `#505050` | Muted Gray  |
 | Buttons & Borders | `#303030` | Deep Gray   |
 
+## Environment Variables
+
+The following environment variables are required and must be stored in an `.env` file:
+
+```env
+MONGODB_URL=
+NEXT_SECRET=
+```
+
+
 ## Installation
 
 1. Clone the repository:
@@ -94,5 +104,10 @@ Made with 💫 by [Jane Doe](https://github.com/jane-does-coding).
 ## Screenshots
 
 <img width="1209" alt="Screenshot 2025-03-14 at 10 31 27 PM" src="https://github.com/user-attachments/assets/f47cc1f7-827f-4577-986f-d7b92f55ded2" />
-<img width="1209" alt="Screenshot 2025-03-14 at 10 31 50 PM" src="https://github.com/user-attachments/assets/56b1018c-b088-47dd-85bb-f73ad03e0599" />
-<img width="375" alt="Screenshot 2025-03-14 at 10 32 39 PM" src="https://github.com/user-attachments/assets/209c17c3-f718-4a48-8896-d349fbf3dc1b" /><img width="375" alt="Screenshot 2025-03-14 at 10 32 46 PM" src="https://github.com/user-attachments/assets/dd133c89-e9d0-43d9-ba2f-ae33d40b2b23" />
+
+<details>
+    <summary>Click to open the rest</summary>
+    <img width="1209" alt="Screenshot 2025-03-14 at 10 31 50 PM" src="https://github.com/user-attachments/assets/56b1018c-b088-47dd-85bb-f73ad03e0599" />
+    <img width="375" alt="Screenshot 2025-03-14 at 10 32 39 PM" src="https://github.com/user-attachments/assets/209c17c3-f718-4a48-8896-d349fbf3dc1b" /><img width="375" alt="Screenshot 2025-03-14 at 10 32 46 PM" src="https://github.com/user-attachments/assets/dd133c89-e9d0-43d9-ba2f-ae33d40b2b23" />
+</details>
+
