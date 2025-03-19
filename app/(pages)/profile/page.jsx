@@ -5,8 +5,9 @@ import ProfilePage from "../../../components/Pages/Profile";
 
 const page = async () => {
 	const currentUser = await getCurrentUser();
+	console.log(currentUser);
 
-	if (!currentUser.name)
+	if (!currentUser)
 		return (
 			<div className="min-h-[95vh] bg-neutral-800">
 				<div className="w-[100vw] h-[70vh] flex flex-col items-center justify-center">
