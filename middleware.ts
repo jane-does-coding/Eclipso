@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 
 export default withAuth(
 	function middleware(req) {
-		// Redirect unauthenticated users to /login with a callback URL
 		if (!req.nextauth.token) {
 			const url = req.nextUrl.clone();
 			url.pathname = "/login";
@@ -13,7 +12,7 @@ export default withAuth(
 	},
 	{
 		callbacks: {
-			authorized: ({ token }) => !!token, // Ensure the user is authenticated
+			authorized: ({ token }) => !!token,
 		},
 	}
 );

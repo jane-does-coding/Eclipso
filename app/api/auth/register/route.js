@@ -7,7 +7,6 @@ export async function POST(req) {
 	try {
 		const hashedPassword = await bcrypt.hash(password, 10);
 
-		// Create user first
 		const user = await prisma.user.create({
 			data: {
 				fullName,
@@ -17,7 +16,6 @@ export async function POST(req) {
 			},
 		});
 
-		// Insert habits associated with the user
 		if (habits && habits.length > 0) {
 			await prisma.habit.createMany({
 				data: habits.map((habit) => ({

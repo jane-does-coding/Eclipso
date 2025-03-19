@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
-import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useRegisterModal from "../../app/hooks/useRegisterModal";
 import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../Input";
@@ -17,7 +17,7 @@ const RegisterModal = () => {
 	const registerModal = useRegisterModal();
 	const loginModal = useLoginModal();
 	const [isLoading, setIsLoading] = useState(false);
-	const [currentStep, setCurrentStep] = useState(1); // Keep track of current step (1: register, 2: habits, 3: goal)
+	const [currentStep, setCurrentStep] = useState(1);
 
 	const {
 		register,
@@ -29,8 +29,8 @@ const RegisterModal = () => {
 			name: "",
 			email: "",
 			password: "",
-			habits: ["", "", ""], // Array to hold 3 habits
-			goalDuration: 7, // Default goal duration
+			habits: ["", "", ""],
+			goalDuration: 7,
 		},
 	});
 
@@ -55,7 +55,7 @@ const RegisterModal = () => {
 						email: data.email,
 						password: data.password,
 						goalDate: data.goalDuration,
-						habits: data.habits.filter((habit) => habit.trim() !== ""), // Remove empty habits
+						habits: data.habits.filter((habit) => habit.trim() !== ""),
 					}),
 				});
 
@@ -115,7 +115,7 @@ const RegisterModal = () => {
 					{[0, 1, 2].map((index) => (
 						<Input
 							key={index}
-							id={`habits[${index}]`} // Use array syntax for habits
+							id={`habits[${index}]`}
 							label={`Habit #${index + 1}`}
 							disabled={isLoading}
 							register={register}

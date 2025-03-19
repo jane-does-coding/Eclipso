@@ -33,5 +33,5 @@ model HabitCompletion {
   habit     Habit   @relation(fields: [habitId], references: [id])
   date      DateTime
   completed Boolean
-  userId    String  @db.ObjectId  // 🔥 Added userId
+  userId    String  @db.ObjectId 
 }

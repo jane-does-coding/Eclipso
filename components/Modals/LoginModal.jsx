@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
-import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useRegisterModal from "../../app/hooks/useRegisterModal";
 import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../Input";
@@ -31,8 +31,8 @@ const LoginModal = () => {
 	});
 
 	const onSubmit = (data) => {
-		console.log("Form Data:", data); // Debug form data
-		console.log("Form Errors:", errors); // Debug form errors
+		console.log("Form Data:", data);
+		console.log("Form Errors:", errors);
 
 		setIsLoading(true);
 
@@ -40,7 +40,7 @@ const LoginModal = () => {
 			...data,
 			redirect: false,
 		}).then((callback) => {
-			console.log("SignIn Callback:", callback); // Debug the callback
+			console.log("SignIn Callback:", callback);
 			setIsLoading(false);
 
 			if (callback?.ok) {
@@ -50,7 +50,7 @@ const LoginModal = () => {
 			}
 
 			if (callback?.error) {
-				console.error("SignIn Error:", callback.error); // Debug the error
+				console.error("SignIn Error:", callback.error);
 				toast.error(callback.error);
 			}
 		});

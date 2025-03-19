@@ -15,7 +15,7 @@ export async function POST(req) {
 	currentDate.setUTCHours(0, 0, 0, 0);
 	console.log({
 		habitId,
-		userId: currentUser.id, // 🔥 Added user filter
+		userId: currentUser.id,
 		date: currentDate,
 	});
 
@@ -23,7 +23,7 @@ export async function POST(req) {
 		const existingCompletion = await prisma.habitCompletion.findFirst({
 			where: {
 				habitId,
-				userId: currentUser.id, // 🔥 Added user filter
+				userId: currentUser.id,
 				date: currentDate,
 			},
 		});
@@ -38,7 +38,7 @@ export async function POST(req) {
 			const newEntry = await prisma.habitCompletion.create({
 				data: {
 					habitId,
-					userId: currentUser.id, // 🔥 Ensure correct user ownership
+					userId: currentUser.id,
 					completed,
 					date: currentDate,
 				},

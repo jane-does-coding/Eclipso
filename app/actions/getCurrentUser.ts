@@ -1,7 +1,5 @@
 import { getServerSession } from "next-auth/next";
 
-/* import { authOptions } from "@/pages/api/auth/[...nextauth]";
- */
 import prisma from "../../libs/prismadb";
 import { authOptions } from "../../pages/api/auth/[...nextauth]";
 
@@ -24,7 +22,7 @@ export default async function getCurrentUser() {
 			include: {
 				habits: {
 					include: {
-						completions: true, // ✅ This includes completions inside habits
+						completions: true,
 					},
 				},
 			},
