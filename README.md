@@ -19,7 +19,7 @@ Eclipso is a cosmic-themed habit tracker that gamifies your daily routines, help
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="# environment-variables">Environment Variables</a></li>
+        <li><a href="#environment-variables">Environment Variables</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
