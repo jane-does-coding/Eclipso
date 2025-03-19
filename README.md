@@ -4,6 +4,30 @@
 
 Eclipso is a cosmic-themed habit tracker that gamifies your daily routines, helping you stay consistent and reach your goals in an engaging way.
 
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#Eclipso">About The Project</a>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#tech-stack">Tech Stack</a></li>
+        <li><a href="#folder-structure">Folder Structure</a></li>
+        <li><a href="#color-palette">Color Palette</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="# environment-variables">Environment Variables</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#future-enhancements">Future Enhancements</a></li>
+    <li><a href="#screenshots">Screenshots</a></li>
+  </ol>
+</details>
+
 ## Features
 
 - 🚀 **Track Habits** – Stay on top of your daily routines.
@@ -60,6 +84,8 @@ eclipso/
 | Text (Accent)     | `#F5A9B8` | Soft Pink   |
 | Cards             | `#505050` | Muted Gray  |
 | Buttons & Borders | `#303030` | Deep Gray   |
+
+# Getting Started
 
 ## Environment Variables
 
