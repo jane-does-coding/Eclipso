@@ -1,23 +1,21 @@
 "use client";
-
 import { FaChevronLeft } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import HabitList from "../../components/HabitList";
+import HabitList from "../HabitList";
 import useHabitModal from "../../app/hooks/useHabitModal";
+import Calendar from "../Calendar";
 
 export default function Today({ currentUser }) {
 	const router = useRouter();
 	const habitModal = useHabitModal();
-	const [habits, setHabits] = useState([]);
-	const [completionRate, setCompletionRate] = useState(75);
-	const calendarData = [80, 50, 100, 30, 60, 90, 20, 40, 70, 50];
+	const [habits, setHabits] = useState(currentUser?.habits || []);
+	const [completionRate, setCompletionRate] = useState(0);
 
+	// Calculate completion rate whenever habits change
 	useEffect(() => {
-		if (currentUser?.habits) {
-			setHabits(currentUser.habits);
-		}
-	}, [currentUser]);
+		calculateCompletionRate();
+	}, [habits]);
 
 	const isHabitCompletedToday = (habit) => {
 		const today = new Date().toISOString().split("T")[0];
@@ -26,6 +24,20 @@ export default function Today({ currentUser }) {
 				new Date(completion.date).toISOString().split("T")[0] === today &&
 				completion.completed
 		);
+	};
+
+	const calculateCompletionRate = () => {
+		const totalHabits = habits.length;
+		if (totalHabits === 0) {
+			setCompletionRate(0);
+			return;
+		}
+
+		const completedHabits = habits.filter((habit) =>
+			isHabitCompletedToday(habit)
+		).length;
+		const rate = Math.round((completedHabits / totalHabits) * 100);
+		setCompletionRate(rate);
 	};
 
 	const toggleHabit = async (id) => {
@@ -45,9 +57,10 @@ export default function Today({ currentUser }) {
 			});
 
 			if (response.ok) {
-				setHabits((prevHabits) =>
-					prevHabits.map((h) => (h.id === id ? updatedHabit : h))
+				const updatedHabits = habits.map((h) =>
+					h.id === id ? updatedHabit : h
 				);
+				setHabits(updatedHabits);
 			} else {
 				console.error("Failed to update habit completion.");
 			}
@@ -56,26 +69,38 @@ export default function Today({ currentUser }) {
 		}
 	};
 
-	const onDelete = async (habitId) => {
-		try {
-			const response = await fetch(`/api/habits/index/${habitId}`, {
-				method: "DELETE",
-			});
+	// Transform habits into the format expected by the Calendar component
+	const getHabitDataForCalendar = () => {
+		const habitData = {};
 
-			if (response.ok) {
-				setHabits((prevHabits) => prevHabits.filter((h) => h.id !== habitId));
-			} else {
-				console.error("Failed to delete habit.");
-			}
-		} catch (error) {
-			console.error("Error deleting habit:", error);
-		}
+		habits.forEach((habit) => {
+			habit.completions?.forEach((completion) => {
+				const date = new Date(completion.date).toISOString().split("T")[0];
+				if (!habitData[date]) {
+					habitData[date] = { completed: 0, total: 0 };
+				}
+				habitData[date].total++;
+				if (completion.completed) {
+					habitData[date].completed++;
+				}
+			});
+		});
+
+		// Calculate completion percentage for each day
+		const result = {};
+		Object.keys(habitData).forEach((date) => {
+			result[date] = Math.round(
+				(habitData[date].completed / habitData[date].total) * 100
+			);
+		});
+
+		return result;
 	};
 
 	return (
 		<div className="flex flex-col bg-[#262627] min-h-screen px-4 sm:px-6 md:px-8 pb-[15vh]">
 			{/* Header */}
-			<div className="flex flex-row items-center w-full mx-auto md:w-[93vw] mt-[2rem]">
+			<div className="flex flex-row items-center w-full mx-auto md:w-[93vw] mt-[2rem] md:mt-[2rem]">
 				<button
 					className="text-neutral-200 text-[1.25rem] sm:text-[1.5rem] flex items-center Absans"
 					onClick={() => router.push("/")}
@@ -110,7 +135,7 @@ export default function Today({ currentUser }) {
 							cx="50"
 							cy="50"
 							r="40"
-							stroke="oklch(0.704 0.191 22.216)"
+							stroke="oklch(0.792 0.209 151.711)"
 							strokeWidth="8"
 							fill="none"
 							strokeDasharray="251.2"
@@ -124,35 +149,19 @@ export default function Today({ currentUser }) {
 					</div>
 				</div>
 
-				{/* Habit Checklist */}
-				<HabitList
-					habits={habits}
-					toggleHabit={toggleHabit}
-					onDelete={onDelete}
-					habitModal={habitModal}
-				/>
+				{/* Habit List */}
+				<div className="text-white w-[45vw]">
+					<HabitList
+						habits={habits}
+						toggleHabit={toggleHabit}
+						habitModal={habitModal}
+					/>
+				</div>
 			</div>
 
 			{/* Calendar Progress */}
 			<div className="flex justify-center mt-12">
-				<div className="grid grid-cols-7 gap-3 sm:gap-4 gap-y-14 sm:gap-y-14">
-					{calendarData.map((completion, index) => (
-						<div
-							key={index}
-							className="w-18 h-18 flex flex-col items-center relative"
-						>
-							<div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-neutral-600 relative overflow-hidden">
-								<div
-									className="absolute bottom-0 left-0 w-full bg-green-400"
-									style={{ height: `${completion}%` }}
-								></div>
-							</div>
-							<span className="text-white Absans text-[0.9rem] sm:text-[1rem] absolute top-[2.5rem] sm:top-[3rem]">
-								{index + 1}
-							</span>
-						</div>
-					))}
-				</div>
+				<Calendar habitData={getHabitDataForCalendar()} />
 			</div>
 		</div>
 	);

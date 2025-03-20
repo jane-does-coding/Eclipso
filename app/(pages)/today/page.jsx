@@ -1,10 +1,12 @@
 import React from "react";
 import Today from "../../../components/Pages/Today";
+import getCurrentUser from "../../actions/getCurrentUser";
 
-const page = () => {
+const page = async () => {
+	const currentUser = await getCurrentUser();
 	return (
 		<div>
-			<Today />
+			<Today currentUser={currentUser} />
 		</div>
 	);
 };
