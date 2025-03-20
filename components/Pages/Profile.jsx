@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { IoIosInformationCircleOutline } from "react-icons/io";
@@ -59,6 +59,16 @@ const ProfilePage = ({ currentUser }) => {
 	const [habits, setHabits] = useState(currentUser.habits || []);
 	const [isStreakInfo, setIsStreakInfo] = useState(false);
 	const habitModal = useHabitModal();
+	const [streak, setStreak] = useState(0);
+
+	useEffect(() => {
+		if (currentUser?.id) {
+			axios
+				.get(`/api/streak/`)
+				.then((res) => setStreak(res.data.streak))
+				.catch((err) => console.error("Error fetching streak:", err));
+		}
+	}, [currentUser]);
 
 	const isHabitCompletedToday = (habit) => {
 		const today = new Date().toISOString().split("T")[0];
@@ -111,8 +121,8 @@ const ProfilePage = ({ currentUser }) => {
 		email: currentUser.email,
 		avatar: "/avatar.png",
 		goalDays: currentUser.goalDate,
-		goalProgress: 10,
-		streak: 22,
+		goalProgress: streak,
+		streak: streak,
 		completionRate: 85,
 		totalHabits: currentUser.habits.length,
 		mostConsistentHabit: "whatever",
@@ -233,7 +243,7 @@ const ProfilePage = ({ currentUser }) => {
 						/>
 					</h4>
 					<p className={`text-neutral-300 ${isStreakInfo ? "flex" : "hidden"}`}>
-						Streak is saved if you've completed over 50% of the habits in a day
+						Streak is saved if you've completed 100% of the habits in a day
 					</p>
 					<p className="text-[2rem] font-bold Flazie">{user.streak} days</p>
 				</div>
