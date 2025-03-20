@@ -4,6 +4,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import useHabitModal from "../../app/hooks/useHabitModal";
+import useEditProfileModal from "../../app/hooks/useEditProfileModal";
 import axios from "axios";
 import { FaRegTrashCan } from "react-icons/fa6";
 import HabitList from "../HabitList";
@@ -63,6 +64,7 @@ const ProfilePage = ({
 	const [habits, setHabits] = useState(currentUser.habits || []);
 	const [isStreakInfo, setIsStreakInfo] = useState(false);
 	const habitModal = useHabitModal();
+	const editProfileModal = useEditProfileModal();
 	const [streak, setStreak] = useState(0);
 	const [mostConsistentHabit, setMostConsistentHabit] = useState(
 		mostConsistentHabitProp
@@ -283,7 +285,10 @@ const ProfilePage = ({
 
 			{/* Actions */}
 			<div className="mt-6 flex justify-between px-4 sm:px-0">
-				<button className="px-4 py-2 bg-green-400 text-neutral-900 rounded-lg hover:bg-green-500 transition Absans">
+				<button
+					onClick={() => editProfileModal.onOpen()}
+					className="px-4 py-2 bg-green-400 text-neutral-900 rounded-lg hover:bg-green-500 transition Absans"
+				>
 					Edit Profile
 				</button>
 				<button

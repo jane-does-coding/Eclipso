@@ -5,6 +5,7 @@ import RegisterModal from "../components/Modals/RegisterModal";
 import getCurrentUser from "./actions/getCurrentUser";
 import LoginModal from "../components/Modals/LoginModal";
 import HabitModal from "../components/Modals/HabitModal";
+import EditProfileModal from "../components/Modals/EditProfileModal";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
 				<RegisterModal />
 				<LoginModal />
 				<HabitModal />
+				<EditProfileModal currentUser={currentUser} />
 				{children}
 				<Footer />
 			</body>
