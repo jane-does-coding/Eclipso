@@ -6,6 +6,7 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 import useHabitModal from "../../app/hooks/useHabitModal";
 import axios from "axios";
 import { FaRegTrashCan } from "react-icons/fa6";
+import HabitList from "../HabitList";
 
 const CircularProgress = ({ value }) => {
 	const radius = 40;
@@ -54,12 +55,18 @@ const CircularProgress = ({ value }) => {
 	);
 };
 
-const ProfilePage = ({ currentUser }) => {
+const ProfilePage = ({
+	currentUser,
+	mostConsistentHabit: mostConsistentHabitProp,
+}) => {
 	const router = useRouter();
 	const [habits, setHabits] = useState(currentUser.habits || []);
 	const [isStreakInfo, setIsStreakInfo] = useState(false);
 	const habitModal = useHabitModal();
 	const [streak, setStreak] = useState(0);
+	const [mostConsistentHabit, setMostConsistentHabit] = useState(
+		mostConsistentHabitProp
+	);
 
 	useEffect(() => {
 		if (currentUser?.id) {
@@ -119,13 +126,12 @@ const ProfilePage = ({ currentUser }) => {
 	const user = {
 		name: currentUser.fullName,
 		email: currentUser.email,
-		avatar: "/avatar.png",
 		goalDays: currentUser.goalDate,
 		goalProgress: streak,
 		streak: streak,
-		completionRate: 85,
+		completionRate: Math.round((streak / currentUser.goalDate) * 100),
 		totalHabits: currentUser.habits.length,
-		mostConsistentHabit: "whatever",
+		mostConsistentHabit: mostConsistentHabit,
 	};
 
 	return (
@@ -171,7 +177,7 @@ const ProfilePage = ({ currentUser }) => {
 			</div>
 
 			{/* Habit List */}
-			<div className="mt-6 px-4 sm:px-0">
+			{/* <div className="mt-6 px-4 sm:px-0">
 				<h3 className="text-lg font-semibold Absans">Daily Habits</h3>
 				<ul className="mt-2 space-y-3">
 					{habits.length == 0 && (
@@ -224,7 +230,13 @@ const ProfilePage = ({ currentUser }) => {
 							);
 						})}
 				</ul>
-			</div>
+			</div> */}
+			<HabitList
+				habits={habits}
+				toggleHabit={toggleHabit}
+				onDelete={onDelete}
+				habitModal={habitModal}
+			/>
 
 			<img
 				src="/pattern7.png"

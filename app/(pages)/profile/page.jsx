@@ -2,10 +2,12 @@ import React from "react";
 import getCurrentUser from "../../actions/getCurrentUser";
 import LoginButton from "../../../components/LoginButton";
 import ProfilePage from "../../../components/Pages/Profile";
+import getMostConsistentHabit from "../../actions/getMostConsistentHabit";
 
 const page = async () => {
 	const currentUser = await getCurrentUser();
 	console.log(currentUser);
+	const mostConsistentHabit = await getMostConsistentHabit();
 
 	if (!currentUser)
 		return (
@@ -23,7 +25,10 @@ const page = async () => {
 		);
 	return (
 		<div>
-			<ProfilePage currentUser={currentUser} />
+			<ProfilePage
+				mostConsistentHabit={mostConsistentHabit}
+				currentUser={currentUser}
+			/>
 		</div>
 	);
 };

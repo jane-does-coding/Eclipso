@@ -18,7 +18,6 @@ model User {
   habits    Habit[]
 
 }
-
 model Habit {
   id           String           @id @default(auto()) @map("_id") @db.ObjectId
   name         String
@@ -30,8 +29,9 @@ model Habit {
 model HabitCompletion {
   id        String  @id @default(auto()) @map("_id") @db.ObjectId
   habitId   String  @db.ObjectId
-  habit     Habit   @relation(fields: [habitId], references: [id])
+  habit     Habit   @relation(fields: [habitId], references: [id], onDelete: Cascade)
   date      DateTime
   completed Boolean
   userId    String  @db.ObjectId 
 }
+
