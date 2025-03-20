@@ -7,7 +7,7 @@ const LoginButton = () => {
 	return (
 		<button
 			onClick={() => loginModal.onOpen()}
-			className="bg-gradient-to-r from-rose-300 to-rose-400 px-14 py-2 rounded-full text-[1.5rem] Absans font-bold"
+			className="bg-gradient-to-r from-green-400 to-green-500 px-14 py-2 rounded-full text-[1.5rem] Absans font-bold"
 		>
 			Login
 		</button>

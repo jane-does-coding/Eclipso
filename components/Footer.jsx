@@ -11,7 +11,7 @@ const Footer = () => {
 	return (
 		<footer className="bg-neutral-900/[97%] border-t-2 border-t-neutral-900 text-white py-6 text-center flex flex-col items-center gap-4">
 			<p className="text-sm flex flex-row">
-				Made with <SiGithubsponsors size={20} className="text-rose-400 mx-2" />
+				Made with <SiGithubsponsors size={20} className="text-green-500 mx-2" />
 				by jane-does-coding
 			</p>
 			<div className="flex gap-6 text-2xl">

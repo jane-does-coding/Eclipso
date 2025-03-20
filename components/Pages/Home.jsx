@@ -44,7 +44,7 @@ export default function Home(currentUser) {
 				{/* Header */}
 				<div className="flex flex-col md:flex-row justify-between items-center w-full mx-auto md:w-[93vw] mt-[2rem]">
 					<div className="flex flex-col text-center md:text-left">
-						<h1 className="text-[3rem] sm:text-[4rem] md:text-[6rem] leading-[4rem] md:leading-[6rem] Flazie text-rose-300 glowing-text">
+						<h1 className="text-[3rem] sm:text-[4rem] md:text-[6rem] leading-[4rem] md:leading-[6rem] Flazie text-green-400 glowing-text">
 							Eclipso
 						</h1>
 						<p className="text-neutral-100 text-lg sm:text-xl md:text-2xl Absans">
@@ -97,7 +97,7 @@ export default function Home(currentUser) {
 					className="w-full flex items-center justify-center mt-6 relative"
 				>
 					<img
-						src="/pattern5.png"
+						src="/pattern7.png"
 						className="h-[15vh] w-full rounded-md opacity-90"
 					/>
 					<h2 className="text-neutral-800 absolute text-3xl sm:text-5xl font-bold Absans">
@@ -117,7 +117,7 @@ export default function Home(currentUser) {
 						/>
 						<button
 							type="submit"
-							className="bg-rose-300 text-neutral-900 px-6 py-2 text-[1rem] rounded-r-full text-lg font-semibold hover:bg-rose-400 transition"
+							className="bg-green-400 text-neutral-900 px-6 py-2 text-[1rem] rounded-r-full text-lg font-semibold hover:bg-green-500 transition"
 						>
 							Search
 						</button>

@@ -11,7 +11,7 @@ const page = async () => {
 		return (
 			<div className="min-h-[95vh] bg-neutral-800">
 				<div className="w-[100vw] h-[70vh] flex flex-col items-center justify-center">
-					<h1 className="Flazie glowing-text text-[6rem] text-rose-300">
+					<h1 className="Flazie glowing-text text-[6rem] text-green-400">
 						Eclipso
 					</h1>
 					<h2 className="text-neutral-200 Absans text-[1.75rem] mb-[5vh]">

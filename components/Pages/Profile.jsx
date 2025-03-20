@@ -31,7 +31,7 @@ const CircularProgress = ({ value }) => {
 					cx="50"
 					cy="50"
 					r={radius}
-					stroke="oklch(0.704 0.191 22.216)"
+					stroke="oklch(0.792 0.209 151.711)"
 					strokeWidth="8"
 					fill="none"
 					strokeDasharray={circumference}
@@ -140,7 +140,7 @@ const ProfilePage = ({ currentUser }) => {
 				</button>
 			</div>
 
-			<h1 className="text-[3rem] sm:text-[4rem] md:text-[6rem] Flazie text-rose-300 glowing-text text-center">
+			<h1 className="text-[3rem] sm:text-[4rem] md:text-[6rem] Flazie text-green-400 glowing-text text-center">
 				Profile
 			</h1>
 			{/* User Info */}
@@ -181,7 +181,7 @@ const ProfilePage = ({ currentUser }) => {
 							</h1>
 							<button
 								onClick={() => habitModal.onOpen()}
-								className="px-4 py-2 bg-rose-300 text-neutral-900 rounded-lg hover:bg-rose-400 transition Absans"
+								className="px-4 py-2 bg-green-400 text-neutral-900 rounded-lg hover:bg-green-500 transition Absans"
 							>
 								Set New Habit
 							</button>
@@ -211,7 +211,7 @@ const ProfilePage = ({ currentUser }) => {
 											className={`px-4 py-2 text-sm rounded-full transition ${
 												isCompleted
 													? "bg-gray-500 text-white hover:bg-gray-600"
-													: "bg-rose-300 text-neutral-900 hover:bg-rose-400"
+													: "bg-green-400 text-neutral-900 hover:bg-green-500"
 											}`}
 										>
 											{isCompleted ? "Undo" : "Done"}
@@ -227,7 +227,7 @@ const ProfilePage = ({ currentUser }) => {
 			</div>
 
 			<img
-				src="/pattern5.png"
+				src="/pattern7.png"
 				className="block w-[90vw] mx-auto sm:w-full h-[10vh] rounded-md mt-[1rem] object-cover sm:object-fill"
 				alt=""
 			/>
@@ -271,12 +271,12 @@ const ProfilePage = ({ currentUser }) => {
 
 			{/* Actions */}
 			<div className="mt-6 flex justify-between px-4 sm:px-0">
-				<button className="px-4 py-2 bg-rose-300 text-neutral-900 rounded-lg hover:bg-rose-400 transition Absans">
+				<button className="px-4 py-2 bg-green-400 text-neutral-900 rounded-lg hover:bg-green-500 transition Absans">
 					Edit Profile
 				</button>
 				<button
 					onClick={() => habitModal.onOpen()}
-					className="px-4 py-2 bg-rose-300 text-neutral-900 rounded-lg hover:bg-rose-400 transition Absans"
+					className="px-4 py-2 bg-green-400 text-neutral-900 rounded-lg hover:bg-green-500 transition Absans"
 				>
 					Set New Habit
 				</button>

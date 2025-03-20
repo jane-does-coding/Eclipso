@@ -23,7 +23,7 @@ export default function Today() {
 			</div>
 
 			<div className="flex flex-col items-center mt-4">
-				<h1 className="text-[3rem] sm:text-[4rem] md:text-[6rem] Flazie text-rose-300 glowing-text text-center">
+				<h1 className="text-[3rem] sm:text-[4rem] md:text-[6rem] Flazie text-green-400 glowing-text text-center">
 					Today
 				</h1>
 			</div>
@@ -89,7 +89,7 @@ export default function Today() {
 						>
 							<div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-neutral-600 relative overflow-hidden">
 								<div
-									className="absolute bottom-0 left-0 w-full bg-rose-300"
+									className="absolute bottom-0 left-0 w-full bg-green-400"
 									style={{ height: `${completion}%` }}
 								></div>
 							</div>
