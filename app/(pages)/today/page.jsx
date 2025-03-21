@@ -1,6 +1,7 @@
 import React from "react";
 import Today from "../../../components/Pages/Today";
 import getCurrentUser from "../../actions/getCurrentUser";
+import LoginButton from "../../../components/LoginButton";
 
 const page = async () => {
 	const currentUser = await getCurrentUser();
