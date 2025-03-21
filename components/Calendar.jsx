@@ -28,15 +28,17 @@ const Calendar = ({ habitData }) => {
 			for (let i = 0; i < 7; i++) {
 				const formattedDate = format(day, "yyyy-MM-dd");
 				const completion = habitData[formattedDate] || 0;
-				const color =
-					completion === 0
-						? "bg-gray-600"
-						: `bg-green-400 opacity-${Math.round(completion / 25) * 25}`;
+
+				// Change color only for 100% completion
+				const colorClass =
+					completion === 100
+						? "bg-green-400 text-neutral-900"
+						: "bg-gray-600 text-white";
 
 				days.push(
 					<div
 						key={day}
-						className={`w-10 h-10 flex items-center justify-center ${color} rounded-full text-white`}
+						className={`w-10 h-10 flex items-center justify-center ${colorClass} rounded-full`}
 					>
 						{isSameMonth(day, monthStart) ? format(day, "d") : ""}
 					</div>
