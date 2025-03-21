@@ -19,7 +19,6 @@ async function seedTestData() {
 			throw new Error("No habits found for the user");
 		}
 
-		// Add new habits: Reading, Yoga, and Journaling
 		const newHabitNames = ["Reading", "Yoga", "Journaling"];
 		const existingHabitNames = habits.map((habit) => habit.name);
 		const habitsToCreate = newHabitNames.filter(
@@ -32,7 +31,6 @@ async function seedTestData() {
 			});
 		}
 
-		// Fetch updated habits list after adding new ones
 		const updatedHabits = await prisma.habit.findMany({
 			where: { userId: user.id },
 		});
@@ -59,7 +57,6 @@ async function seedTestData() {
 			currentDate.setDate(currentDate.getDate() + 1);
 		}
 
-		// Ensure last 5 days are a streak
 		currentDate = new Date();
 		for (let i = 5; i > 0; i--) {
 			let date = new Date();

@@ -6,6 +6,7 @@ import HabitList from "../HabitList";
 import useHabitModal from "../../app/hooks/useHabitModal";
 import Calendar from "../Calendar";
 import HabitCalendar from "../Calendar";
+import CompletionTable from "../CompletionTable";
 
 export default function Today({ currentUser }) {
 	const router = useRouter();
@@ -13,7 +14,6 @@ export default function Today({ currentUser }) {
 	const [habits, setHabits] = useState(currentUser?.habits || []);
 	const [completionRate, setCompletionRate] = useState(0);
 
-	// Calculate completion rate whenever habits change
 	useEffect(() => {
 		calculateCompletionRate();
 	}, [habits]);
@@ -70,7 +70,6 @@ export default function Today({ currentUser }) {
 		}
 	};
 
-	// Transform habits into the format expected by the Calendar component
 	const getHabitDataForCalendar = () => {
 		const habitData = {};
 
@@ -87,7 +86,6 @@ export default function Today({ currentUser }) {
 			});
 		});
 
-		// Calculate completion percentage for each day
 		const result = {};
 		Object.keys(habitData).forEach((date) => {
 			result[date] = Math.round(
@@ -161,8 +159,11 @@ export default function Today({ currentUser }) {
 			</div>
 
 			{/* Calendar Progress */}
-			<div className="flex justify-center mt-12">
+			{/* <div className="flex justify-center mt-12">
 				<HabitCalendar habitData={getHabitDataForCalendar()} />
+			</div> */}
+			<div className="flex justify-center mt-12">
+				<CompletionTable habitData={getHabitDataForCalendar()} />
 			</div>
 		</div>
 	);

@@ -44,20 +44,16 @@ const ProfilePage = ({
 	};
 
 	const toggleHabit = async (id) => {
-		// Find the habit to toggle
 		const habit = habits.find((h) => h.id === id);
 		if (!habit) return;
 
-		// Create an updated habit object
 		const updatedHabit = { ...habit, completed: !isHabitCompletedToday(habit) };
 
-		// Optimistically update the UI
 		setHabits((prevHabits) =>
 			prevHabits.map((h) => (h.id === id ? updatedHabit : h))
 		);
 
 		try {
-			// Send the request to the backend
 			const response = await fetch(`/api/habits/completions`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
@@ -71,7 +67,6 @@ const ProfilePage = ({
 				throw new Error("Failed to update habit completion.");
 			}
 		} catch (error) {
-			// Revert the UI if the request fails
 			setHabits((prevHabits) =>
 				prevHabits.map((h) => (h.id === id ? habit : h))
 			);

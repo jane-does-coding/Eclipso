@@ -16,8 +16,9 @@ model User {
   createdAt DateTime @default(now()) 
   updatedAt DateTime @updatedAt      
   habits    Habit[]
-
+  achievements Achievement[]
 }
+
 model Habit {
   id           String           @id @default(auto()) @map("_id") @db.ObjectId
   name         String
@@ -35,3 +36,13 @@ model HabitCompletion {
   userId    String  @db.ObjectId 
 }
 
+model Achievement {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String   @unique
+  description String
+  icon      String   
+  earned    Boolean  @default(false)
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  earnedAt  DateTime @default(now())
+}

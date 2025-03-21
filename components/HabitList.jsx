@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
 
 const HabitList = ({ habits, toggleHabit, onDelete, habitModal }) => {
+	const [fakeCompletionStates, setFakeCompletionStates] = useState({});
+
 	const isHabitCompletedToday = (habit) => {
 		const today = new Date().toISOString().split("T")[0];
 		return habit.completions.some(
@@ -8,6 +11,17 @@ const HabitList = ({ habits, toggleHabit, onDelete, habitModal }) => {
 				new Date(completion.date).toISOString().split("T")[0] === today &&
 				completion.completed
 		);
+	};
+
+	const handleToggleHabit = (habitId) => {
+		// Toggle the fake completion state immediately
+		setFakeCompletionStates((prevStates) => ({
+			...prevStates,
+			[habitId]: !prevStates[habitId],
+		}));
+
+		// Call the original toggleHabit function to update the backend
+		toggleHabit(habitId);
 	};
 
 	return (
@@ -29,6 +43,10 @@ const HabitList = ({ habits, toggleHabit, onDelete, habitModal }) => {
 				)}
 				{habits.map((habit) => {
 					const isCompleted = isHabitCompletedToday(habit);
+					const isFakeCompleted =
+						fakeCompletionStates[habit.id] !== undefined
+							? fakeCompletionStates[habit.id]
+							: isCompleted;
 
 					return (
 						<li
@@ -37,26 +55,26 @@ const HabitList = ({ habits, toggleHabit, onDelete, habitModal }) => {
 							animate={{ opacity: 1, y: 0 }}
 							exit={{ opacity: 0, y: -10 }}
 							className={`flex items-center justify-between bg-neutral-700 p-3 px-8 rounded-lg ${
-								isCompleted ? "bg-green-700" : ""
+								isFakeCompleted ? "bg-green-700" : ""
 							}`}
 						>
 							<span
 								className={`Absans text-[1.5rem] ${
-									isCompleted ? "line-through text-gray-500" : ""
+									isFakeCompleted ? "line-through text-gray-500" : ""
 								}`}
 							>
 								{habit.name}
 							</span>
 							<div className="flex gap-2">
 								<button
-									onClick={() => toggleHabit(habit.id)}
+									onClick={() => handleToggleHabit(habit.id)}
 									className={`px-4 py-2 text-sm rounded-full transition ${
-										isCompleted
+										isFakeCompleted
 											? "bg-gray-500 text-white hover:bg-gray-600"
 											: "bg-green-400 text-neutral-900 hover:bg-green-500"
 									}`}
 								>
-									{isCompleted ? "Undo" : "Done"}
+									{isFakeCompleted ? "Undo" : "Done"}
 								</button>
 								<button onClick={() => onDelete(habit.id)}>
 									<FaRegTrashCan size={24} />
