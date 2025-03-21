@@ -3,7 +3,6 @@ import { FaRegTrashCan } from "react-icons/fa6";
 const HabitList = ({ habits, toggleHabit, onDelete, habitModal }) => {
 	const isHabitCompletedToday = (habit) => {
 		const today = new Date().toISOString().split("T")[0];
-
 		return habit.completions.some(
 			(completion) =>
 				new Date(completion.date).toISOString().split("T")[0] === today &&
@@ -28,42 +27,44 @@ const HabitList = ({ habits, toggleHabit, onDelete, habitModal }) => {
 						</button>
 					</div>
 				)}
-				{habits.length > 0 &&
-					habits.map((habit) => {
-						const isCompleted = isHabitCompletedToday(habit);
+				{habits.map((habit) => {
+					const isCompleted = isHabitCompletedToday(habit);
 
-						return (
-							<li
-								key={habit.id}
-								className={`flex items-center justify-between bg-neutral-700 p-3 px-8 rounded-lg ${
-									isCompleted ? "bg-green-700" : ""
+					return (
+						<li
+							key={habit.id}
+							initial={{ opacity: 0, y: -10 }}
+							animate={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: -10 }}
+							className={`flex items-center justify-between bg-neutral-700 p-3 px-8 rounded-lg ${
+								isCompleted ? "bg-green-700" : ""
+							}`}
+						>
+							<span
+								className={`Absans text-[1.5rem] ${
+									isCompleted ? "line-through text-gray-500" : ""
 								}`}
 							>
-								<span
-									className={`Absans text-[1.5rem] ${
-										isCompleted ? "line-through text-gray-500" : ""
+								{habit.name}
+							</span>
+							<div className="flex gap-2">
+								<button
+									onClick={() => toggleHabit(habit.id)}
+									className={`px-4 py-2 text-sm rounded-full transition ${
+										isCompleted
+											? "bg-gray-500 text-white hover:bg-gray-600"
+											: "bg-green-400 text-neutral-900 hover:bg-green-500"
 									}`}
 								>
-									{habit.name}
-								</span>
-								<div className="flex gap-2">
-									<button
-										onClick={() => toggleHabit(habit.id)}
-										className={`px-4 py-2 text-sm rounded-full transition ${
-											isCompleted
-												? "bg-gray-500 text-white hover:bg-gray-600"
-												: "bg-green-400 text-neutral-900 hover:bg-green-500"
-										}`}
-									>
-										{isCompleted ? "Undo" : "Done"}
-									</button>
-									<button onClick={() => onDelete(habit.id)}>
-										<FaRegTrashCan size={24} />
-									</button>
-								</div>
-							</li>
-						);
-					})}
+									{isCompleted ? "Undo" : "Done"}
+								</button>
+								<button onClick={() => onDelete(habit.id)}>
+									<FaRegTrashCan size={24} />
+								</button>
+							</div>
+						</li>
+					);
+				})}
 			</ul>
 		</div>
 	);
