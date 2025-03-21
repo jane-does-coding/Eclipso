@@ -8,6 +8,7 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { LuLogOut } from "react-icons/lu";
 import axios from "axios";
+import challengesData from "../../data/challenges.json";
 
 export default function Home({ currentUser }) {
 	const [isListView, setIsListView] = useState(false);
@@ -16,6 +17,13 @@ export default function Home({ currentUser }) {
 	const registerModal = useRegisterModal();
 	const router = useRouter();
 	const [streak, setStreak] = useState(0);
+	const [challenge, setChallenge] = useState("");
+	const [isChallengeModalOpen, setIsChallengeModalOpen] = useState(false);
+
+	useEffect(() => {
+		const todayIndex = new Date().getDate() % challengesData.challenges.length;
+		setChallenge(challengesData.challenges[todayIndex]);
+	}, []);
 
 	useEffect(() => {
 		if (currentUser?.id) {
@@ -97,7 +105,6 @@ export default function Home({ currentUser }) {
 						user.streak + " Day Streak",
 						user.goalDays + " Days Left",
 						user.completionRate + "% Completed",
-						"Daily Challenge",
 					].map((text, index) => (
 						<div
 							key={index}
@@ -111,7 +118,39 @@ export default function Home({ currentUser }) {
 							</p>
 						</div>
 					))}
+					<div
+						className="bg-neutral-700 p-4 sm:p-6 flex flex-col items-center justify-center rounded-md cursor-pointer"
+						onClick={() => setIsChallengeModalOpen(true)}
+					>
+						<h1 className="text-3xl sm:text-[2.75rem] font-bold Flazie flex flex-col items-center justify-center">
+							Daily <span className="Absans text-sm md:text-lg">Challenge</span>
+						</h1>
+					</div>
 				</div>
+				{isChallengeModalOpen && (
+					<div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[9]">
+						<div className="bg-neutral-800 p-6 pb-8 rounded-md text-center w-[35vw]">
+							<h2 className="text-[2.5rem] font-bold Flazie">
+								Today's Challenge
+							</h2>
+							<p className="mt-4 mb-6 text-[1.5rem] Absans">{challenge}</p>
+							<div className="w-full flex gap-2">
+								<button
+									className="mt-4 px-4 py-2 bg-green-400 text-black Absans w-full rounded-md"
+									onClick={() => setIsChallengeModalOpen(false)}
+								>
+									Close
+								</button>
+								<button
+									className="mt-4 px-4 py-2 bg-green-400 text-black Absans w-full rounded-md"
+									onClick={() => setIsChallengeModalOpen(false)}
+								>
+									Completed
+								</button>
+							</div>
+						</div>
+					</div>
+				)}
 
 				{/* Today's Entry */}
 				<a
