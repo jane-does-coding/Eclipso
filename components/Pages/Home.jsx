@@ -7,13 +7,24 @@ import useRegisterModal from "../../app/hooks/useRegisterModal";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { LuLogOut } from "react-icons/lu";
+import axios from "axios";
 
-export default function Home(currentUser) {
+export default function Home({ currentUser }) {
 	const [isListView, setIsListView] = useState(false);
 	const [articles, setArticles] = useState([]);
 	const [searchTerm, setSearchTerm] = useState("");
 	const registerModal = useRegisterModal();
 	const router = useRouter();
+	const [streak, setStreak] = useState(0);
+
+	useEffect(() => {
+		if (currentUser?.id) {
+			axios
+				.get(`/api/streak/`)
+				.then((res) => setStreak(res.data.streak))
+				.catch((err) => console.error("Error fetching streak:", err));
+		}
+	}, [currentUser]);
 
 	const fetchArticles = async (query = "") => {
 		try {
@@ -34,6 +45,17 @@ export default function Home(currentUser) {
 	const handleSearch = (e) => {
 		e.preventDefault();
 		fetchArticles(searchTerm);
+	};
+
+	const user = {
+		name: currentUser.fullName,
+		email: currentUser.email,
+		goalDays: currentUser.goalDate,
+		goalProgress: streak,
+		streak: streak,
+		completionRate: Math.round((streak / currentUser.goalDate) * 100),
+		totalHabits: currentUser.habits.length,
+		mostConsistentHabit: "nun",
 	};
 
 	if (!currentUser) {
@@ -72,9 +94,9 @@ export default function Home(currentUser) {
 				{/* Boxes */}
 				<div className="grid grid-cols-2 sm:grid-cols-4 w-full mx-auto gap-2 sm:gap-4 mt-6 sm:mt-8">
 					{[
-						"21 Day Streak",
-						"45 Days Left",
-						"31% Completed",
+						user.streak + " Day Streak",
+						user.goalDays + " Days Left",
+						user.completionRate + "% Completed",
 						"Daily Challenge",
 					].map((text, index) => (
 						<div

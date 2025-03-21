@@ -19,10 +19,10 @@ const ProfilePage = ({
 	const [isStreakInfo, setIsStreakInfo] = useState(false);
 	const habitModal = useHabitModal();
 	const editProfileModal = useEditProfileModal();
-	const [streak, setStreak] = useState(0);
 	const [mostConsistentHabit, setMostConsistentHabit] = useState(
 		mostConsistentHabitProp
 	);
+	const [streak, setStreak] = useState(0);
 
 	useEffect(() => {
 		if (currentUser?.id) {

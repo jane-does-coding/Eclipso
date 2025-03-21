@@ -4,7 +4,7 @@ import getCurrentUser from "../../actions/getCurrentUser";
 
 export async function GET() {
 	try {
-		const user = await getCurrentUser();
+		let user = await getCurrentUser();
 
 		if (!user?.id) {
 			return NextResponse.json({ message: "not authorized" }, { status: 401 });
