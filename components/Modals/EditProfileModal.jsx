@@ -10,6 +10,7 @@ import axios from "axios";
 import useEditProfileModal from "../../app/hooks/useEditProfileModal";
 
 const EditProfileModal = ({ currentUser }) => {
+	if (!currentUser) return;
 	const router = useRouter();
 	const [fullName, setFullName] = useState(currentUser.fullName || "");
 	const [goalDate, setGoalDate] = useState(currentUser.goalDate || 7);
