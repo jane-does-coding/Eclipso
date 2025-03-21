@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import HabitList from "../HabitList";
 import useHabitModal from "../../app/hooks/useHabitModal";
 import Calendar from "../Calendar";
+import HabitCalendar from "../Calendar";
 
 export default function Today({ currentUser }) {
 	const router = useRouter();
@@ -161,7 +162,7 @@ export default function Today({ currentUser }) {
 
 			{/* Calendar Progress */}
 			<div className="flex justify-center mt-12">
-				<Calendar habitData={getHabitDataForCalendar()} />
+				<HabitCalendar habitData={getHabitDataForCalendar()} />
 			</div>
 		</div>
 	);

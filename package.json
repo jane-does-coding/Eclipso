@@ -20,6 +20,7 @@
 		"next-auth": "^4.24.11",
 		"prisma": "^6.5.0",
 		"react": "^19.0.0",
+		"react-calendar": "^5.1.0",
 		"react-dom": "^19.0.0",
 		"react-hook-form": "^7.54.2",
 		"react-hot-toast": "^2.5.2",

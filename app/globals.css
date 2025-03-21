@@ -82,3 +82,25 @@
 .glowing-text {
 	text-shadow: 3px 3px 0px white !important;
 }
+
+/* Add this to your global CSS file or a CSS module */
+.react-calendar__tile {
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.react-calendar__tile.bg-green-400 {
+	background-color: #4ade80; /* Tailwind's green-400 */
+	color: #000; /* Tailwind's text-black */
+}
+
+.react-calendar__tile.bg-gray-600 {
+	background-color: #4b5563; /* Tailwind's gray-600 */
+	color: #fff; /* Tailwind's text-white */
+}
+
+.react-calendar__tile.rounded-full {
+	border-radius: 9999px; /* Tailwind's rounded-full */
+}
